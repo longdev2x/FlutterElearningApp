@@ -13,7 +13,7 @@ class HttpUtil {
       contentType: 'application/json: charset=utf-8',
       responseType: ResponseType.json,
     );
-    Dio dio = Dio(options);
+    Dio(options);
   }
 
   static final HttpUtil _instance = HttpUtil._internal();
