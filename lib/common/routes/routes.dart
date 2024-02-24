@@ -60,3 +60,4 @@ class RouteEntity {
   final String path;
   final Widget page;
 }
+

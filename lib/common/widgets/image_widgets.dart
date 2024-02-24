@@ -44,3 +44,4 @@ class AppImageWithColor extends StatelessWidget {
     );
   }
 }
+

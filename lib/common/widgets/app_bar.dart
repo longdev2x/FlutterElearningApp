@@ -14,3 +14,4 @@ AppBar buildAppBar({required String title}) {
     ),
   );
 }
+

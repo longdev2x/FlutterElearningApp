@@ -6,3 +6,4 @@
   static const String application = '/application';
   static const String home = '/home';
 }
+

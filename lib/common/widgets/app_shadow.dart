@@ -84,3 +84,4 @@ class AppBoxDecorationImage extends StatelessWidget {
     );
   }
 }
+
