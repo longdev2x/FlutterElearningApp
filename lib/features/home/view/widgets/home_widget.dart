@@ -2,15 +2,19 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/common/models/user.dart';
 import 'package:ulearning_app/common/utils/app_colors.dart';
+import 'package:ulearning_app/common/utils/constants.dart';
 import 'package:ulearning_app/common/utils/image_res.dart';
 import 'package:ulearning_app/common/widgets/app_shadow.dart';
 import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/common/widgets/text_widgets.dart';
 import 'package:ulearning_app/features/home/provider/banner_dots_provider.dart';
+import 'package:ulearning_app/features/home/provider/user_profile_provider.dart';
 import 'package:ulearning_app/global.dart';
 
-AppBar homeAppBar() {
+AppBar homeAppBar(WidgetRef ref) {
+  final fetchUserProfile = ref.watch(fetchUserProfileProvider);
   return AppBar(
     leading: IconButton(
       onPressed: () {},
@@ -18,10 +22,17 @@ AppBar homeAppBar() {
       icon: AppImage(imagePath: ImageRes.menu, width: 18.w, height: 12.h),
     ),
     actions: [
-      IconButton(
-        onPressed: () {},
-        icon: const AppBoxDecorationImage(),
-      ),
+      fetchUserProfile.when(
+          data: (data) {
+            print("${AppConstants.serverApiUrl}${data.avatar}");
+            return GestureDetector(
+              onTap: () {},
+              child: AppBoxDecorationImage(imagePath: "${AppConstants.serverApiUrl}${data.avatar}" ?? ''),
+            );
+          },
+          error: (error, stackTrace) => AppImage(
+              imagePath: ImageRes.defaultImg, width: 18.w, height: 12.h),
+          loading: () => Container()),
     ],
   );
 }
@@ -192,24 +203,23 @@ class CourseItemGrid extends StatelessWidget {
     return GridView.builder(
       physics: const ScrollPhysics(),
       shrinkWrap: true,
-        itemCount: 18,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          childAspectRatio: 1,
-        ),
-        itemBuilder: (ctx, index) {
-          return InkWell(
-            onTap: () {
-              print('Ok');
-            },
-            splashColor: Colors.black,
-            highlightColor: Colors.black,
-            child: AppImage(imagePath: testList[index]),
-          );
-        },
-      );
+      itemCount: 18,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        childAspectRatio: 1,
+      ),
+      itemBuilder: (ctx, index) {
+        return InkWell(
+          onTap: () {
+            print('Ok');
+          },
+          splashColor: Colors.black,
+          highlightColor: Colors.black,
+          child: AppImage(imagePath: testList[index]),
+        );
+      },
+    );
   }
 }
-

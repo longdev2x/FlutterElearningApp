@@ -9,7 +9,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: homeAppBar(),
+      appBar: homeAppBar(ref),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: SingleChildScrollView(

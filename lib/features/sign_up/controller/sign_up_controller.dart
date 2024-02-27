@@ -47,9 +47,14 @@ class SignUpController {
     var navigator = Navigator.of(ref.context);
     try {
       ref.read(appLoaderNotifierProvider.notifier).updateLoader(true);
+
       final credential = await SignUpRepo.firebaseSignUp(email, password);
+
       await credential.user!.sendEmailVerification();
       await credential.user!.updateDisplayName(username);
+      String photoURL = 'uploads/default.png';
+      await credential.user!.updatePhotoURL(photoURL);
+
       ref.read(appLoaderNotifierProvider.notifier).updateLoader(false);
       toastInfo(
           'An email has been to verify your account. Please open $email and confirm that identity ');

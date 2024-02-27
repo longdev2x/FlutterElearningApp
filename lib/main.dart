@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/routes/routes.dart';
-import 'package:ulearning_app/common/services/http_util.dart';
 import 'package:ulearning_app/common/utils/app_styles.dart';
 import 'package:ulearning_app/global.dart';
 
 void main() async {
   await Global.init();
-  HttpUtil().post('api/login');
   runApp(
     const ProviderScope(
       child: MyApp(),

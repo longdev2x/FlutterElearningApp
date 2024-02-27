@@ -32,12 +32,12 @@ class AppPages {
   }
 
   static MaterialPageRoute generateRoutSettings(RouteSettings settings) {
-    //settings chứa name... nó chứa cái đường dẫn khi gọi pushNamed
-    //Check xem đăng nhập lần đầu hay không
-    //Global.storageService.removeKey(AppConstants.storageDeviceOpenFirstKey, 5);
+
+    Global.storageService.removeKey(AppConstants.storageDeviceOpenFirstKey, 5);
     //Global.storageService.removeKey(AppConstants.storageUserTokenKey, 5);
     var result =
         routes().where((element) => element.path == settings.name).toList();
+        
     bool deviceFirstTime = Global.storageService.getDeviceFirstOpen();
     bool isLoggedIn = Global.storageService.isLoggedIn();
 
