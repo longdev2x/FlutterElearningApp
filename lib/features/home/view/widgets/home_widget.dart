@@ -2,7 +2,6 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:ulearning_app/common/models/user.dart';
 import 'package:ulearning_app/common/utils/app_colors.dart';
 import 'package:ulearning_app/common/utils/constants.dart';
 import 'package:ulearning_app/common/utils/image_res.dart';
@@ -10,6 +9,7 @@ import 'package:ulearning_app/common/widgets/app_shadow.dart';
 import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/common/widgets/text_widgets.dart';
 import 'package:ulearning_app/features/home/provider/banner_dots_provider.dart';
+import 'package:ulearning_app/features/home/provider/course_list_provider.dart';
 import 'package:ulearning_app/features/home/provider/user_profile_provider.dart';
 import 'package:ulearning_app/global.dart';
 
@@ -24,10 +24,10 @@ AppBar homeAppBar(WidgetRef ref) {
     actions: [
       fetchUserProfile.when(
           data: (data) {
-            print("${AppConstants.serverApiUrl}${data.avatar}");
             return GestureDetector(
               onTap: () {},
-              child: AppBoxDecorationImage(imagePath: "${AppConstants.serverApiUrl}${data.avatar}" ?? ''),
+              child: AppBoxDecorationImage(
+                  imagePath: "${AppConstants.serverApiUrl}${data.avatar}"),
             );
           },
           error: (error, stackTrace) => AppImage(
@@ -165,7 +165,7 @@ class HomeMenuBar extends StatelessWidget {
           ],
         ),
         SizedBox(height: 20.h),
-        // Course item button
+        // Course item button long@gmail.com
         Row(children: [
           Container(
             padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 5.h),
@@ -195,31 +195,45 @@ class HomeMenuBar extends StatelessWidget {
   }
 }
 
-class CourseItemGrid extends StatelessWidget {
+class CourseItemGrid extends ConsumerWidget {
   const CourseItemGrid({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: const ScrollPhysics(),
-      shrinkWrap: true,
-      itemCount: 18,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        childAspectRatio: 1,
-      ),
-      itemBuilder: (ctx, index) {
-        return InkWell(
-          onTap: () {
-            print('Ok');
-          },
-          splashColor: Colors.black,
-          highlightColor: Colors.black,
-          child: AppImage(imagePath: testList[index]),
-        );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final courseState = ref.watch(fetchCourseListProvider);
+    return courseState.when(
+      data: (data) {
+        if (data != null) {
+          return GridView.builder(
+            physics: const ScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: data.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 10,
+              childAspectRatio: 1,
+            ),
+            itemBuilder: (ctx, index) {
+              return InkWell(
+                onTap: () {},
+                splashColor: Colors.black,
+                highlightColor: Colors.black,
+                child: AppImageNetwork(imagePath: '${AppConstants.imageUploadsPath}${data[index].thumbnail!}'),
+              );
+            },
+          );
+        } else {
+          return const SizedBox(
+              child: Center(
+            child: Text('No have course'),
+          ));
+        }
       },
+      error: (error, stackTrace) {
+        return SizedBox(child:Center(child: Text(error.toString(), style: const TextStyle(color: Colors.black, fontSize: 30)),));
+      },
+      loading: () => const CircularProgressIndicator(),
     );
   }
 }

@@ -34,7 +34,7 @@ class ImageRes {
 }
 
 List<String> testList = [
-  ImageRes.course3,
+  ImageRes.course4,
   ImageRes.course1,
   ImageRes.course2,
   ImageRes.course4,
