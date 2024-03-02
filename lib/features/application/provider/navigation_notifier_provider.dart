@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NavigationNotifierProvider extends StateNotifier<int> {
-  NavigationNotifierProvider() : super(0);
+class NavigationNotifier extends StateNotifier<int> {
+  NavigationNotifier() : super(0);
 
   void changIndex(int index) {
     state = index;
@@ -9,6 +9,6 @@ class NavigationNotifierProvider extends StateNotifier<int> {
 }
 
 final navigationNotifierProvider =
-    StateNotifierProvider<NavigationNotifierProvider, int>(
-  (ref) => NavigationNotifierProvider(),
+    StateNotifierProvider<NavigationNotifier, int>(
+  (ref) => NavigationNotifier(),
 );

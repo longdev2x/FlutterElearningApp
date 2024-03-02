@@ -65,10 +65,12 @@ class AppBoxDecorationImage extends StatelessWidget {
       {super.key,
       this.width = 40,
       this.height = 40,
+      this.boxFit = BoxFit.fitHeight,
       this.imagePath = ImageRes.profilePhoto});
   final double width;
   final double height;
   final String imagePath;
+  final BoxFit boxFit;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -77,7 +79,7 @@ class AppBoxDecorationImage extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.w),
         image: DecorationImage(
-          fit: BoxFit.fitHeight,
+          fit: boxFit,
           image: NetworkImage(imagePath),
         ),
       ),

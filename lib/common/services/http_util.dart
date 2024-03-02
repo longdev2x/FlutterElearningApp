@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:ulearning_app/common/utils/constants.dart';
 import 'package:ulearning_app/global.dart';
 
@@ -115,16 +116,24 @@ ErrorEntity createErrorEntity(DioException dioException) {
 void onError(ErrorEntity errorEntity) {
   switch(errorEntity.code) {
     case 400:
-      print("Server syntax error");
+      if (kDebugMode) {
+        print("Server syntax error");
+      }
       break;
     case 401:
-      print("You are denied to continue");
+      if (kDebugMode) {
+        print("You are denied to continue");
+      }
       break;
     case 500:
-      print("Server internal error");
+      if (kDebugMode) {
+        print("Server internal error");
+      }
       break;
     default:
-      print("Unknown error");
+      if (kDebugMode) {
+        print("Unknown error");
+      }
       break;
   }
 }

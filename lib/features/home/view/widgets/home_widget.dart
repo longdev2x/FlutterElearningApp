@@ -210,16 +210,20 @@ class CourseItemGrid extends ConsumerWidget {
             itemCount: data.length,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1,
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+              childAspectRatio: 1.6,
             ),
             itemBuilder: (ctx, index) {
               return InkWell(
                 onTap: () {},
                 splashColor: Colors.black,
                 highlightColor: Colors.black,
-                child: AppImageNetwork(imagePath: '${AppConstants.imageUploadsPath}${data[index].thumbnail!}'),
+                child: AppBoxDecorationImage(
+                  imagePath:
+                      '${AppConstants.imageUploadsPath}${data[index].thumbnail!}',
+                  boxFit: BoxFit.fitWidth,
+                ),
               );
             },
           );
@@ -231,7 +235,11 @@ class CourseItemGrid extends ConsumerWidget {
         }
       },
       error: (error, stackTrace) {
-        return SizedBox(child:Center(child: Text(error.toString(), style: const TextStyle(color: Colors.black, fontSize: 30)),));
+        return SizedBox(
+            child: Center(
+          child: Text(error.toString(),
+              style: const TextStyle(color: Colors.black, fontSize: 30)),
+        ));
       },
       loading: () => const CircularProgressIndicator(),
     );

@@ -10,7 +10,8 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: homeAppBar(ref),
-      body: Padding(
+      body: RefreshIndicator(
+        child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: SingleChildScrollView(
           child: Column(
@@ -30,6 +31,10 @@ class HomeScreen extends ConsumerWidget {
             ],
           ),
         ),
+      ),
+      onRefresh: () async {
+
+      },
       ),
     );
   }

@@ -34,7 +34,7 @@ class AppPages {
   static MaterialPageRoute generateRoutSettings(RouteSettings settings) {
 
     Global.storageService.removeKey(AppConstants.storageDeviceOpenFirstKey, 5);
-    //Global.storageService.removeKey(AppConstants.storageUserTokenKey, 5);
+    //Global.storageService.removeKey(AppConstants.storageUserTokenKey, 5); 
     var result =
         routes().where((element) => element.path == settings.name).toList();
         
