@@ -5,5 +5,6 @@
   static const String register = '/register';
   static const String application = '/application';
   static const String home = '/home';
+  static const String detail = '/detail';
 }
 

@@ -23,11 +23,12 @@ class Text10Normal extends StatelessWidget {
     );
   }
 }
+
 class Text11Normal extends StatelessWidget {
   const Text11Normal(
       {super.key,
       required this.text,
-      this.color = AppColors.primaryElementText });
+      this.color = AppColors.primaryElementText});
   final String text;
   final Color color;
 
@@ -44,6 +45,7 @@ class Text11Normal extends StatelessWidget {
     );
   }
 }
+
 class Text14Normal extends StatelessWidget {
   const Text14Normal(
       {super.key,
@@ -114,7 +116,6 @@ class Text24Normal extends StatelessWidget {
   }
 }
 
-
 class TextUnderline extends StatelessWidget {
   const TextUnderline({super.key, required this.text});
   final String text;
@@ -137,3 +138,29 @@ class TextUnderline extends StatelessWidget {
   }
 }
 
+class FadeText extends StatelessWidget {
+  final String text;
+  final Color color;
+  final double fontSize;
+  const FadeText(
+      {super.key,
+      required this.text,
+      this.fontSize = 10,
+      this.color = AppColors.primaryElementText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: TextAlign.left,
+      softWrap: null,
+      maxLines: 1,
+      overflow: TextOverflow.fade,
+      style: TextStyle(
+        color: color,
+        fontSize: fontSize.sp,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+}

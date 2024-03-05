@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/widgets/search_widgets.dart';
+import 'package:ulearning_app/features/home/provider/course_list_provider.dart';
 import 'package:ulearning_app/features/home/view/widgets/home_widget.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -33,7 +34,7 @@ class HomeScreen extends ConsumerWidget {
         ),
       ),
       onRefresh: () async {
-
+        return ref.refresh(fetchCourseListProvider.future);
       },
       ),
     );

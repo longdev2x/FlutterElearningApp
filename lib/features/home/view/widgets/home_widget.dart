@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/common/routes/app_routes_names.dart';
 import 'package:ulearning_app/common/utils/app_colors.dart';
 import 'package:ulearning_app/common/utils/constants.dart';
 import 'package:ulearning_app/common/utils/image_res.dart';
@@ -220,6 +221,10 @@ class CourseItemGrid extends ConsumerWidget {
                 splashColor: Colors.black,
                 highlightColor: Colors.black,
                 child: AppBoxDecorationImage(
+                  voidFunction: () async {
+                    Navigator.of(context).pushNamed(AppRoutesNames.detail, arguments: data[index].id);
+                  },
+                  courseItem: data[index],
                   imagePath:
                       '${AppConstants.imageUploadsPath}${data[index].thumbnail!}',
                   boxFit: BoxFit.fitWidth,
@@ -241,7 +246,7 @@ class CourseItemGrid extends ConsumerWidget {
               style: const TextStyle(color: Colors.black, fontSize: 30)),
         ));
       },
-      loading: () => const CircularProgressIndicator(),
+      loading: () => const Center(child: CircularProgressIndicator()),
     );
   }
 }
