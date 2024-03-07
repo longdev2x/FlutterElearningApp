@@ -45,17 +45,3 @@ class AppImageWithColor extends StatelessWidget {
   }
 }
 
-class AppImageNetwork extends StatelessWidget{
-  final String imagePath;
-  final double width;
-  final double height;
-  const AppImageNetwork({super.key, this.imagePath = '', this.width = 16, this.height = 16});
-  @override
-  Widget build(BuildContext context) {
-    return Image.network(
-      imagePath,
-      width: width.w,
-      height: height.h,
-    );
-  }
-}

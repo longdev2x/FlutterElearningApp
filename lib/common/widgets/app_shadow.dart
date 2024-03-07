@@ -13,7 +13,7 @@ BoxDecoration appBoxShadow(
     BoxBorder? boxBorder}) {
   return BoxDecoration(
     color: color,
-    borderRadius: BorderRadius.circular(radius),
+    borderRadius: BorderRadius.circular(radius.w),
     border: boxBorder,
     boxShadow: [
       BoxShadow(

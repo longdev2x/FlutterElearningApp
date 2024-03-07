@@ -11,6 +11,10 @@ final fetchCourseDetailProvider = FutureProvider.family<CourseItem?, int>((ref, 
     return null;
   }
 
+  if (kDebugMode) {
+    print(response.data);
+  }
+
   if(response.code == 200) {
     return response.data;
   } else {

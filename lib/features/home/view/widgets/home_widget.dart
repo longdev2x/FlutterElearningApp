@@ -157,7 +157,7 @@ class HomeMenuBar extends StatelessWidget {
             const Text16Normal(
               text: 'Choice your course',
               color: AppColors.primaryText,
-              fontWeight: FontWeight.bold,
+              fontweight: FontWeight.bold,
             ),
             GestureDetector(
               onTap: () {},
