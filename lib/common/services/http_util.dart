@@ -50,6 +50,7 @@ class HttpUtil {
     Options? options,
   }) async {
 
+
     Options requestOptions = options?? Options(); //Options() sẽ lấy dữ liêu từ BaseOptions nếu ta k đưa options cho hàm
     requestOptions.headers = requestOptions.headers?? {}; // BaseOptions để {} nên có thể null, trường hợp đó thì gán cho {}
 

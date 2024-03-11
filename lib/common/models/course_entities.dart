@@ -61,7 +61,7 @@ class CourseItem {
       this.score,
       this.createdAt,
       this.updatedAt,
-      this.videoLength});
+      this.videoLength,});
 
   factory CourseItem.fromJson(Map<String, dynamic> json) {
     return CourseItem(
