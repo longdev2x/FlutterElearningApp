@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/models/course_entities.dart';
 import 'package:ulearning_app/common/models/lesson_entities.dart';
+import 'package:ulearning_app/common/routes/app_routes_names.dart';
 import 'package:ulearning_app/common/utils/app_colors.dart';
 import 'package:ulearning_app/common/utils/constants.dart';
 import 'package:ulearning_app/common/utils/image_res.dart';
@@ -10,7 +11,7 @@ import 'package:ulearning_app/common/widgets/app_shadow.dart';
 import 'package:ulearning_app/common/widgets/button_widgets.dart';
 import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/common/widgets/text_widgets.dart';
-import 'package:ulearning_app/features/course_detail/provider/course_provider.dart';
+import 'package:ulearning_app/features/lesson_detail/provider/lesson_detail_provider.dart';
 
 class CourseDetailThumbnail extends StatelessWidget {
   final CourseItem courseItem;
@@ -104,7 +105,7 @@ class CourseDetailDescription extends StatelessWidget {
           fontweight: FontWeight.bold,
           color: AppColors.primaryText,
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 5.h),
         FadeText(
           text: courseItem.description ?? "No description",
           fontSize: 10,
@@ -192,13 +193,13 @@ class CourseInfo extends StatelessWidget {
   }
 }
 
-class LessonInfo extends ConsumerWidget {
-  const LessonInfo({super.key});
+class LessonInfo extends StatelessWidget {
+  final List<LessonItem>? lessons;
+  final WidgetRef ref;
+  const LessonInfo({super.key, required this.lessons, required this.ref});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final fetchListLesson =
-        ref.watch(lessonFutureProviderFamily(const LessonRequestEntity(id: 4)));
+  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -207,53 +208,71 @@ class LessonInfo extends ConsumerWidget {
             color: AppColors.primaryText,
             fontweight: FontWeight.bold),
         SizedBox(height: 20.h),
-        InkWell(
-          onTap: () {},
-          borderRadius: BorderRadius.circular(15),
-          child: Container(
-            width: 325.w,
-            height: 80.h,
-            padding: EdgeInsets.all(10.w),
-            decoration: appBoxShadow(color: AppColors.primaryBackground),
-            child: fetchListLesson.when(
-              data: (data) {
-                if (data == null) {
-                  return const SizedBox(
-                      child: Center(child: Text('No Values')));
-                }
-                return Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const AppImage(
-                      imagePath: ImageRes.boy,
-                      height: 50,
-                      width: 50,
+        lessons == null
+            ? Container()
+            : ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: lessons!.length,
+                itemBuilder: (ctx, index) {
+                  return InkWell(
+                    onTap: () {
+                      ref.watch(lessonDetailFutureProviderFamily(index));
+                      Navigator.of(context)
+                          .pushNamed(AppRoutesNames.lessonDetail);
+                    },
+                    borderRadius: BorderRadius.circular(15),
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      width: 325.w,
+                      height: 80.h,
+                      padding: EdgeInsets.all(10.w),
+                      decoration:
+                          appBoxShadow(color: AppColors.primaryBackground),
+                      child: lessons == null
+                          ? const SizedBox(
+                              child: Center(child: Text('No Values')))
+                          : Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                AppBoxDecorationImage(
+                                  imagePath:
+                                      '${AppConstants.imageUploadsPath}${lessons![index].thumbnail}',
+                                  boxFit: BoxFit.fitWidth,
+                                  height: 50,
+                                  width: 50,
+                                ),
+                                SizedBox(width: 10.w),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text11Normal(
+                                          text: lessons![index].name ??
+                                              "What are UI design?",
+                                          maxLines: 1,
+                                          color: AppColors.primaryText),
+                                      Text10Normal(
+                                        text: lessons![index].description ??
+                                            "What are UI design?",
+                                        maxLines: 1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(width: 10.w),
+                                const Spacer(),
+                                const AppImage(
+                                    imagePath: ImageRes.arrowRight,
+                                    width: 24,
+                                    height: 24),
+                              ],
+                            ),
                     ),
-                    SizedBox(width: 10.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text11Normal(
-                            text: data[0].name ?? "What are UI design?",
-                            color: AppColors.primaryText),
-                        Text10Normal(
-                            text: data[0].description ?? "What are UI design?"),
-                      ],
-                    ),
-                    SizedBox(width: 10.w),
-                    const Spacer(),
-                    const AppImage(
-                        imagePath: ImageRes.arrowRight, width: 24, height: 24),
-                  ],
-                );
-              },
-              error: (error, stackTrace) =>
-                  SizedBox(child: Text(error.toString())),
-              loading: () => const Center(child: CircularProgressIndicator()),
-            ),
-          ),
-        ),
+                  );
+                }),
       ],
     );
   }

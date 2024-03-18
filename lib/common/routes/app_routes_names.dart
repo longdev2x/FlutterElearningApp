@@ -5,6 +5,7 @@
   static const String register = '/register';
   static const String application = '/application';
   static const String home = '/home';
-  static const String detail = '/detail';
+  static const String courseDetail = '/courseDetail';
+  static const String lessonDetail = '/lessonDetail';
 }
 

@@ -1,13 +1,12 @@
-import 'dart:convert';
 
 import 'package:ulearning_app/common/models/course_entities.dart';
 import 'package:ulearning_app/common/models/lesson_entities.dart';
 import 'package:ulearning_app/common/services/http_util.dart';
 
 class CourseRepo{
-  static Future<CourseDetailResponseEntity?> courseDetail({int? id}) async {
+  static Future<CourseDetailResponseEntity?> courseDetail({CourseRequestEntity? params}) async {
     var response = await HttpUtil().post('api/courseDetail', 
-    queryParameters: {'id' : id});
+    queryParameters: {'id' : params?.toJson()});
     return CourseDetailResponseEntity.formJson(response);
   }
 

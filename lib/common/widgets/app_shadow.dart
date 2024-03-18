@@ -65,7 +65,7 @@ BoxDecoration appBoxDecorationTextField({
 class AppBoxDecorationImage extends StatelessWidget {
   final double width;
   final double height;
-  final String imagePath;
+  final String? imagePath;
   final BoxFit boxFit;
   final CourseItem? courseItem;
   final void Function()? voidFunction;
@@ -78,7 +78,7 @@ class AppBoxDecorationImage extends StatelessWidget {
       this.boxFit = BoxFit.fitHeight,
       this.courseItem,
       this.voidFunction,
-      this.imagePath = ImageRes.profilePhoto});
+      this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,9 @@ class AppBoxDecorationImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(20.w),
           image: DecorationImage(
             fit: boxFit,
-            image: NetworkImage(imagePath),
+            image: imagePath != null 
+            ? NetworkImage(imagePath!)
+            : const AssetImage(ImageRes.profilePhoto) as ImageProvider<Object>,
           ),
         ),
         child: courseItem == null

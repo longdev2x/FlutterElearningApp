@@ -216,20 +216,15 @@ class CourseItemGrid extends ConsumerWidget {
               childAspectRatio: 1.6,
             ),
             itemBuilder: (ctx, index) {
-              return InkWell(
-                onTap: () {},
-                splashColor: Colors.black,
-                highlightColor: Colors.black,
-                child: AppBoxDecorationImage(
+              return AppBoxDecorationImage(
                   voidFunction: () async {
-                    Navigator.of(context).pushNamed(AppRoutesNames.detail, arguments: data[index].id);
+                    Navigator.of(context).pushNamed(AppRoutesNames.courseDetail, arguments: data[index].id);
                   },
                   courseItem: data[index],
                   imagePath:
                       '${AppConstants.imageUploadsPath}${data[index].thumbnail!}',
                   boxFit: BoxFit.fitWidth,
-                ),
-              );
+                );
             },
           );
         } else {

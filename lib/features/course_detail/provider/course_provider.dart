@@ -5,8 +5,8 @@ import 'package:ulearning_app/common/models/lesson_entities.dart';
 import 'package:ulearning_app/features/course_detail/repo/course_repo.dart';
 
 final courseDetailFutureProviderFamily = FutureProvider.family<CourseItem?, int>((ref, params) async {
-
-  final response = await CourseRepo.courseDetail(id: params);
+CourseRequestEntity courseRequestEntity = CourseRequestEntity(id: params);
+  final response = await CourseRepo.courseDetail(params: courseRequestEntity);
 
   if(response==null){
     return null;
@@ -23,8 +23,9 @@ final courseDetailFutureProviderFamily = FutureProvider.family<CourseItem?, int>
 });
 
 
-final lessonFutureProviderFamily = FutureProvider.family<List<LessonItem>?, LessonRequestEntity?> ((ref, params) async {
-  final response = await CourseRepo.lessonList(params: params);
+final lessonFutureProviderFamily = FutureProvider.family<List<LessonItem>?, int?> ((ref, id) async {
+  LessonRequestEntity lessonRequestEntity = LessonRequestEntity(id: id);
+  final response = await CourseRepo.lessonList(params: lessonRequestEntity);
   if(response == null) {
     return null;
   }

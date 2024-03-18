@@ -5,10 +5,11 @@ import 'package:ulearning_app/common/utils/app_colors.dart';
 class Text10Normal extends StatelessWidget {
   final String text;
   final Color color;
-
+  final int? maxLines;
   const Text10Normal(
       {super.key,
       required this.text,
+      this.maxLines,
       this.color = AppColors.primaryThreeElementText});
 
   @override
@@ -16,10 +17,12 @@ class Text10Normal extends StatelessWidget {
     return Text(
       text,
       textAlign: TextAlign.start,
+      maxLines: maxLines,
       style: TextStyle(
         color: color,
         fontSize: 10.sp,
         fontWeight: FontWeight.normal,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }
@@ -29,10 +32,12 @@ class Text11Normal extends StatelessWidget {
   final String text;
   final Color color;
   final FontWeight fontweight;
+  final int? maxLines;
   const Text11Normal(
       {super.key,
       required this.text,
       this.fontweight = FontWeight.normal,
+      this.maxLines,
       this.color = AppColors.primaryElementText});
 
   @override
@@ -40,10 +45,12 @@ class Text11Normal extends StatelessWidget {
     return Text(
       text,
       textAlign: TextAlign.start,
+      maxLines: maxLines,
       style: TextStyle(
         color: color,
         fontSize: 10.sp,
         fontWeight: fontweight,
+        overflow: TextOverflow.ellipsis,
       ),
     );
   }

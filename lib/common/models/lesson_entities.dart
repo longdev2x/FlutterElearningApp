@@ -1,16 +1,16 @@
 class LessonRequestEntity {
-  final int id;
-  const LessonRequestEntity({required this.id});
-  Map<String, int>? toJson() => {
+  final int? id;
+  const LessonRequestEntity({this.id});
+  Map<String, dynamic>? toJson() => {
         "id": id,
       };
 }
 
 class LessonListResponseEntity {
-  int? code;
-  String? msg;
-  List<LessonItem>? data;
-  LessonListResponseEntity({this.code, this.msg, this.data});
+  final int? code;
+  final String? msg;
+  final List<LessonItem>? data;
+  const LessonListResponseEntity({this.code, this.msg, this.data});
 
   factory LessonListResponseEntity.fromJson(Map<String, dynamic> json) {
     return LessonListResponseEntity(
@@ -25,15 +25,34 @@ class LessonListResponseEntity {
   }
 }
 
-class LessonItem {
-  int? id;
-  int? courseId;
-  String? name;
-  String? thumbnail;
-  String? description;
-  List<LessonVideoItem>? video;
+class LessonDetailResponseEntity {
+  final int? code;
+  final String? msg;
+  final List<LessonVideoItem>? data;
+  const LessonDetailResponseEntity({this.code, this.msg, this.data});
 
-  LessonItem({
+  factory LessonDetailResponseEntity.fromJson(Map<String, dynamic> json) {
+    return LessonDetailResponseEntity(
+      code: json['code'],
+      msg: json['msg'],
+      data: json['data'] != null
+          ? List<LessonVideoItem>.from(json['data']['video'].map((e) {
+              return LessonVideoItem.fromJson(e);
+            }))
+          : null,
+    );
+  }
+}
+
+class LessonItem {
+  final int? id;
+  final int? courseId;
+  final String? name;
+  final String? thumbnail;
+  final String? description;
+  final List<LessonVideoItem>? video;
+
+  const LessonItem({
     this.id,
     this.courseId,
     this.name,
@@ -42,25 +61,27 @@ class LessonItem {
     this.video,
   });
 
-  factory LessonItem.fromJson(Map<String, dynamic> json) => LessonItem(
-        id: json['id'],
-        courseId: json['course_id'],
-        name: json['name'],
-        thumbnail: json['thumbnail'],
-        description: json['description'],
-        video: json['video'] == null
-            ? []
-            : List<LessonVideoItem>.from(
-                json['video'].map((e) => LessonVideoItem.fromJson(e))),
-      );
+  factory LessonItem.fromJson(Map<String, dynamic> json) {
+    return LessonItem(
+      id: json['id'],
+      courseId: json['course_id'],
+      name: json['name'],
+      thumbnail: json['thumbnail'],
+      description: json['description'],
+      video: json['video'] == null
+          ? []
+          : List<LessonVideoItem>.from(
+              json['video'].map((e) => LessonVideoItem.fromJson(e))),
+    );
+  }
 }
 
 class LessonVideoItem {
-  String? name;
-  String? thumbnail;
-  String? url;
+  final String? name;
+  final String? thumbnail;
+  final String? url;
 
-  LessonVideoItem({this.name, this.thumbnail, this.url});
+  const LessonVideoItem({this.name, this.thumbnail, this.url});
 
   factory LessonVideoItem.fromJson(Map<String, dynamic> json) =>
       LessonVideoItem(
@@ -68,4 +89,27 @@ class LessonVideoItem {
         thumbnail: json['thumbnail'],
         url: json['url'],
       );
+}
+
+class LessonVideo {
+  final List<LessonVideoItem> lessonItems;
+  final Future<void>? initializeVideoPlayer;
+  final bool isPlay;
+
+  const LessonVideo(
+      {this.lessonItems = const <LessonVideoItem>[],
+      this.initializeVideoPlayer,
+      this.isPlay = false});
+
+  LessonVideo copyWith(
+      {List<LessonVideoItem>? lessonItems,
+      Future<void>? initializeVideoPlayer,
+      bool? isPlay}) {
+    return LessonVideo(
+      lessonItems: lessonItems ?? this.lessonItems,
+      initializeVideoPlayer:
+          initializeVideoPlayer ?? this.initializeVideoPlayer,
+      isPlay: isPlay ?? this.isPlay,
+    );
+  }
 }

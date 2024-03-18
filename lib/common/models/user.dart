@@ -1,16 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginRequestEntity {
-  int? type;
-  String? name;
-  String? description;
-  String? email;
-  String? phone;
-  String? avatar;
-  String? openId;
-  int? online;
+  final int? type;
+  final String? name;
+  final String? description;
+  final String? email;
+  final String? phone;
+  final String? avatar;
+  final String? openId;
+  final int? online;
 
-  LoginRequestEntity({
+  const LoginRequestEntity({
     this.type,
     this.name,
     this.description,
@@ -35,11 +35,11 @@ class LoginRequestEntity {
 
 //api post response msg
 class UserLoginResponseEntity {
-  int? code;
-  String? msg;
-  UserProfile? data;
+  final int? code;
+  final String? msg;
+  final UserProfile? data;
 
-  UserLoginResponseEntity({
+  const UserLoginResponseEntity({
     this.code,
     this.msg,
     this.data,
@@ -55,15 +55,15 @@ class UserLoginResponseEntity {
 
 // login result
 class UserProfile {
-  String? accessToken;
-  String? token;
-  String? name;
-  String? description;
-  String? avatar;
-  int? online;
-  int? type;
+  final String? accessToken;
+  final String? token;
+  final String? name;
+  final String? description;
+  final String? avatar;
+  final int? online;
+  final int? type;
 // Generic Constructor
-  UserProfile({
+  const UserProfile({
     this.accessToken,
     this.token,
     this.name,
@@ -107,7 +107,7 @@ class UserData {
   final String? description;
   final int? online;
 
-  UserData({
+  const UserData({
     this.token,
     this.name,
     this.avatar,

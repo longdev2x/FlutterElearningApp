@@ -1,10 +1,17 @@
+class CourseRequestEntity{
+  final int? id;
+  const CourseRequestEntity({this.id});
+  Map<String, dynamic>? toJson() => {
+    'id' : id,
+  };
+}
 
 class CourseDetailResponseEntity {
   final int code;
   final String msg;
   final CourseItem? data;
 
-  CourseDetailResponseEntity(
+  const CourseDetailResponseEntity(
       {required this.code, required this.msg, this.data});
 
   factory CourseDetailResponseEntity.formJson(Map<String, dynamic> json) {
@@ -16,11 +23,11 @@ class CourseDetailResponseEntity {
 }
 
 class CourseListResponseEntity {
-  int? code;
-  String? msg;
-  List<CourseItem>? data;
+  final int? code;
+  final String? msg;
+  final List<CourseItem>? data;
 
-  CourseListResponseEntity({this.code, this.msg, this.data});
+  const CourseListResponseEntity({this.code, this.msg, this.data});
 
   factory CourseListResponseEntity.fromJson(Map<String, dynamic> json) {
     return CourseListResponseEntity(
@@ -36,20 +43,20 @@ class CourseListResponseEntity {
 }
 
 class CourseItem {
-  String? name;
-  String? thumbnail;
-  String? video;
-  String? description;
-  int? id;
-  int? price;
-  int? lessonNum;
-  int? videoLength;
-  int? follow;
-  double? score;
-  DateTime? createdAt;
-  DateTime? updatedAt;
+  final String? name;
+  final String? thumbnail;
+  final String? video;
+  final String? description;
+  final int? id;
+  final int? price;
+  final int? lessonNum;
+  final int? videoLength;
+  final int? follow;
+  final double? score;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
-  CourseItem(
+  const CourseItem(
       {this.name,
       this.thumbnail,
       this.video,

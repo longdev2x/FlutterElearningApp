@@ -10,10 +10,12 @@ class CourseDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final argguments = ModalRoute.of(context)!.settings.arguments as int;
+    final arguments = ModalRoute.of(context)!.settings.arguments as int;
 
     final courseDetailState =
-        ref.watch(courseDetailFutureProviderFamily(argguments));
+        ref.watch(courseDetailFutureProviderFamily(arguments));
+    final fetchListLesson =
+        ref.watch(lessonFutureProviderFamily(arguments));
     return courseDetailState.when(
         data: (courseItem) => courseItem == null
             ? const SizedBox(child: Center(child: Text('No course here !!!!')))
@@ -21,24 +23,26 @@ class CourseDetail extends ConsumerWidget {
                 appBar: buildGlobalAppBar(
                   title: courseItem.name ?? 'Course Name',
                 ),
-                body: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 10.h),
-                      CourseDetailThumbnail(courseItem: courseItem),
-                      SizedBox(height: 15.h),
-                      CourseDetailIconText(courseItem: courseItem),
-                      SizedBox(height: 15.h),
-                      CourseDetailDescription(courseItem: courseItem),
-                      SizedBox(height: 15.h),
-                      const CourseDetailGoBuyButton(),
-                      SizedBox(height: 15.h),
-                      CourseDetailIncludes(courseItem: courseItem),
-                      SizedBox(height: 15.h),
-                      const LessonInfo(),
-                    ],
+                body: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 25.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 10.h),
+                        CourseDetailThumbnail(courseItem: courseItem),
+                        SizedBox(height: 15.h),
+                        CourseDetailIconText(courseItem: courseItem),
+                        SizedBox(height: 15.h),
+                        CourseDetailDescription(courseItem: courseItem),
+                        SizedBox(height: 15.h),
+                        const CourseDetailGoBuyButton(),
+                        SizedBox(height: 15.h),
+                        CourseDetailIncludes(courseItem: courseItem),
+                        SizedBox(height: 15.h),
+                        fetchListLesson.when(data: (data) => LessonInfo(lessons: data, ref: ref,), error: (error, stackTrace) => Container(), loading: () => const CircularProgressIndicator(),),
+                      ],
+                    ),
                   ),
                 ),
               ),
