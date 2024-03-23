@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ulearning_app/common/routes/app_routes_names.dart';
+import 'package:ulearning_app/common/utils/constants.dart';
 import 'package:ulearning_app/features/course_detail/view/course_detail.dart';
 import 'package:ulearning_app/features/home/view/home.dart';
 import 'package:ulearning_app/features/lesson_detail/view/lesson_detail.dart';
@@ -41,7 +42,7 @@ class AppPages {
   }
 
   static MaterialPageRoute generateRoutSettings(RouteSettings settings) {
-    //Global.storageService.removeKey(AppConstants.storageDeviceOpenFirstKey, 5);
+    Global.storageService.removeKey(AppConstants.storageDeviceOpenFirstKey, 5);
     //Global.storageService.removeKey(AppConstants.storageUserTokenKey, 5);
     var result =
         routes().where((element) => element.path == settings.name).toList();

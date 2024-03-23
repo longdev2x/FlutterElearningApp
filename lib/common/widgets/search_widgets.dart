@@ -27,7 +27,7 @@ class AppSearchBar extends StatelessWidget {
               SizedBox(
                 width: 240.w,
                 height: 40.h,
-                child: appTextFieldOnly(
+                child: const AppTextFieldOnly(
                     width: 240, height: 40, hintText: 'Search your course...'),
               ),
             ],

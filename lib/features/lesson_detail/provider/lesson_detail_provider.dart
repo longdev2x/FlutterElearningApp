@@ -4,7 +4,7 @@ import 'package:ulearning_app/common/utils/constants.dart';
 import 'package:ulearning_app/features/lesson_detail/repo/lesson_detail_repo.dart';
 import 'package:video_player/video_player.dart';
 
-late VideoPlayerController videoPlayerController;
+late VideoPlayerController? videoPlayerController;
 
 final lessonDetailFutureProviderFamily =
     FutureProvider.family<void, int?>((ref, id) async {
@@ -22,11 +22,13 @@ final lessonDetailFutureProviderFamily =
     videoPlayerController = VideoPlayerController.networkUrl(Uri(
         path:
             '${AppConstants.imageUploadsPath}${lessonDetailResponse.data![0].url}'));
-    var initializeVideoPlayer = videoPlayerController.initialize();
+    var initializeVideoPlayer = videoPlayerController?.initialize();
     LessonVideo lessonVideo = LessonVideo(
       initializeVideoPlayer: initializeVideoPlayer,
       lessonItems: lessonDetailResponse.data!,
+      isPlay: true,
     );
+    videoPlayerController?.play();
     ref.read(stateVideoProvider.notifier).state = lessonVideo;
   }
   return;
@@ -35,7 +37,7 @@ final lessonDetailFutureProviderFamily =
 final stateVideoProvider =
     StateProvider<LessonVideo>((ref) => const LessonVideo());
 
-final videoFutureProvider = FutureProvider<LessonVideo>((ref) async {
+final videoFutureProvider = FutureProvider<LessonVideo?>((ref) async {
   LessonVideo lessonVideo = ref.watch(stateVideoProvider);
-  return lessonVideo;
+  return null;
 });

@@ -22,40 +22,51 @@ class AppOnBoardingPage extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return Column(
-      children: [
-        Image.asset(imagePath, fit: BoxFit.fitHeight),
-        const SizedBox(height: 15),
-        Text24Normal(text: title),
-        const SizedBox(height: 15),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
-          child: Text16Normal(text: subTitle),
-        ),
-        const SizedBox(height: 10),
-        GestureDetector(
-          onTap: () {
-            if (index < 3) {
-              pageController.animateToPage(index,
-                  duration: const Duration(microseconds: 300),
-                  curve: Curves.linear);
-            } else {
-              //remember if we are firsttime or not
-              Global.storageService.setBool(AppConstants.storageDeviceOpenFirstKey, true);
-              Navigator.of(context).pushNamed('/signIn');
-            }
-          },
-          child: Container(
-            alignment: Alignment.center,
-            height: 50,
-            width: 325,
-            margin: const EdgeInsets.only(top: 100, left: 25, right: 25),
-            decoration: appBoxShadow(),
-            child: Text16Normal(
-                text: index < 3 ? 'Next' : 'Get Started', color: Colors.white),
+    return GestureDetector(
+      onTap: () {
+        // FocusScope.of(context).unfocus();
+        // FocusScopeNode currentFocus = FocusScope.of(context);
+        // if (currentFocus.hasPrimaryFocus) {
+        //   currentFocus.unfocus();
+        // }
+      },
+      child: Column(
+        children: [
+          Image.asset(imagePath, fit: BoxFit.fitHeight),
+          const SizedBox(height: 15),
+          Text24Normal(text: title),
+          const SizedBox(height: 15),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: Text16Normal(text: subTitle),
           ),
-        ),
-      ],
+          const SizedBox(height: 10),
+          GestureDetector(
+            onTap: () {
+              if (index < 3) {
+                pageController.animateToPage(index,
+                    duration: const Duration(microseconds: 300),
+                    curve: Curves.linear);
+              } else {
+                //remember if we are firsttime or not
+                Global.storageService
+                    .setBool(AppConstants.storageDeviceOpenFirstKey, true);
+                Navigator.of(context).pushNamed('/signIn');
+              }
+            },
+            child: Container(
+              alignment: Alignment.center,
+              height: 50,
+              width: 325,
+              margin: const EdgeInsets.only(top: 100, left: 25, right: 25),
+              decoration: appBoxShadow(),
+              child: Text16Normal(
+                  text: index < 3 ? 'Next' : 'Get Started',
+                  color: Colors.white),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

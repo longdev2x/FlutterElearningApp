@@ -11,22 +11,24 @@ class LessonDetail extends ConsumerWidget {
     final fetchVideo = ref.watch(videoFutureProvider);
     return Scaffold(
       appBar: AppBar(title: const Text('Test')),
-      body: fetchVideo.when(data: (data) {
-        return data.initializeVideoPlayer == null
+      body: fetchVideo.value == null
+      ? Container()
+      : fetchVideo.when(data: (data) {
+        return data!.initializeVideoPlayer == null
         ? Container()
         : FutureBuilder(
           future: data.initializeVideoPlayer, 
           builder: (context, snapshots) {
             if(snapshots.connectionState == ConnectionState.done) {
-              print('Nowwwwwwww ...... in done');
-              videoPlayerController.play();
-              return Row(
+              return videoPlayerController==null
+              ? Container()
+              : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     width: 325.w,
                     height: 200.h,
-                    child: VideoPlayer(videoPlayerController),
+                    child: VideoPlayer(videoPlayerController!),
                   ),
                 ],
               );

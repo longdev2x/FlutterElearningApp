@@ -40,7 +40,7 @@ class AppTextField extends StatelessWidget {
                   margin: const EdgeInsets.only(left: 17),
                   child: AppImage(imagePath: iconPath),
                 ),
-                appTextFieldOnly(
+                AppTextFieldOnly(
                   controller: controller,
                   hintText: hintText,
                   obscureText: obscureText,
@@ -55,16 +55,19 @@ class AppTextField extends StatelessWidget {
   }
 }
 
+class AppTextFieldOnly extends StatelessWidget {
+  final double height;
+  final double width;
+  final TextEditingController? controller;
+  final String hintText;
+  final void Function(String value)? onChanged;
+  final bool obscureText;
 
-Widget appTextFieldOnly({
-  double height = 55,
-  double width = 280,
-  TextEditingController? controller,
-  String hintText = 'Type in your info',
-  void Function(String value)? onChanged,
-  bool obscureText = false,
-}) {
-  return SizedBox(
+  const AppTextFieldOnly({super.key,this.height = 55, this.width = 280, this.controller, this.hintText = 'Type in your info', this.onChanged, this.obscureText = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
     width: width.w,
     height: height.h,
     child: TextField(
@@ -98,7 +101,10 @@ Widget appTextFieldOnly({
       maxLines: 1,
       autocorrect: false,
       obscureText: obscureText,
+      onEditingComplete: () => FocusScope.of(context).unfocus(),
     ),
   );
+  }
 }
+
 

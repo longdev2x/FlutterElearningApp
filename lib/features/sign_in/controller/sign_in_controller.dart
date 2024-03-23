@@ -33,9 +33,8 @@ class SignInController {
 
     try {
       ref.read(appLoaderNotifierProvider.notifier).updateLoader(true);
-
+      print("111111");
       final credential = await SignInRepo.firebaseSignIn(email, password);
-
       if(credential.user==null) {
         toastInfo('Could not found user Infor');
         return;
@@ -68,7 +67,8 @@ class SignInController {
       if (exception.code == 'wrong-password') {
         toastInfo('Sai mật khẩu');
       } else {
-        toastInfo('Sai đâu đó');
+
+        toastInfo(exception.stackTrace.toString());
       } 
       ref.read(appLoaderNotifierProvider.notifier).updateLoader(false);
     }
