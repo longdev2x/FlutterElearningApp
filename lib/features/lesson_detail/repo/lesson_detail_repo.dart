@@ -3,7 +3,7 @@ import 'package:ulearning_app/common/services/http_util.dart';
 
 class LessonDetailRepo {
   static Future<LessonDetailResponseEntity?> lessonDetail(LessonRequestEntity params) async {
-    final response = await HttpUtil().post('api/lessonDetail', queryParameters: const LessonRequestEntity(id: 3).toJson());
+    final response = await HttpUtil().post('api/lessonDetail', queryParameters: params.toJson());
     return LessonDetailResponseEntity.fromJson(response);
   }
 }

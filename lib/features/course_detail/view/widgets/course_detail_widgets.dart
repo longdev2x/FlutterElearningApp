@@ -217,7 +217,7 @@ class LessonInfo extends StatelessWidget {
                 itemBuilder: (ctx, index) {
                   return InkWell(
                     onTap: () {
-                      ref.watch(lessonDetailFutureProviderFamily(index));
+                      ref.watch(lessonDetailProvider(id: lessons![index].id!));
                       Navigator.of(context)
                           .pushNamed(AppRoutesNames.lessonDetail);
                     },
@@ -265,7 +265,7 @@ class LessonInfo extends StatelessWidget {
                                 SizedBox(width: 10.w),
                                 const Spacer(),
                                 const AppImage(
-                                    imagePath: ImageRes.arrowRight,
+                                    imagePath: ImageRes.right,
                                     width: 24,
                                     height: 24),
                               ],

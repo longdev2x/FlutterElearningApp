@@ -33,7 +33,6 @@ class SignInController {
 
     try {
       ref.read(appLoaderNotifierProvider.notifier).updateLoader(true);
-      print("111111");
       final credential = await SignInRepo.firebaseSignIn(email, password);
       if(credential.user==null) {
         toastInfo('Could not found user Infor');

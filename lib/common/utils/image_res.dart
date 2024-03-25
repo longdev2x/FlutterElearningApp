@@ -21,7 +21,9 @@ class ImageRes {
   static const String videoDetail = '$iconBase/video(1).png';
   static const String fileDetail = '$iconBase/video(1).png';
   static const String dowloadDetail = '$iconBase/video(1).png';
-  static const String arrowRight = '$iconBase/arrow_right.png';
+  static const String right = '$iconBase/arrow_right.png';
+  static const String left = '$iconBase/arrow.png';
+  static const String pause = '$iconBase/pause.png';
 
   static const String course1 = '$iconBase/Image(1).png';
   static const String course2 = '$iconBase/Image(2).png';
