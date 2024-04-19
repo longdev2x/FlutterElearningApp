@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ulearning_app/common/models/lesson_entities.dart';
+import 'package:ulearning_app/common/utils/constants.dart';
 import 'package:ulearning_app/features/lesson_detail/repo/lesson_detail_repo.dart';
 import 'package:video_player/video_player.dart';
 
@@ -16,16 +17,22 @@ Future<void> lessonDetail(LessonDetailRef ref, {required int id}) async {
     return;
   }
   if (lessonDetailResponse.code == 200) {
-    // String url = '${AppConstants.imageUploadsPath}${lessonDetailResponse.data!.elementAt(0).url}';
-    String url = 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
+    String url =
+        '${AppConstants.imageUploadsPath}${lessonDetailResponse.data!.elementAt(0).url}';
+    // String url = 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
     videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(url));
-    var initializeVideoPlayer = videoPlayerController?.initialize();
+    var initializeVideoPlayer =
+        videoPlayerController?.initialize().then((value) {
+      //seekTo run video from ...
+      videoPlayerController?.seekTo(const Duration(seconds: 0));
+      videoPlayerController?.play();
+    });
 
     LessonVideo lessonVideo = LessonVideo(
         lessonItems: lessonDetailResponse.data!,
         initializeVideoPlayer: initializeVideoPlayer,
         isPlay: true);
-    videoPlayerController?.play();
+
     ref
         .read(lessonDataVideoProvider.notifier)
         .updateLessonDataVideo(lessonVideo);
@@ -35,6 +42,7 @@ Future<void> lessonDetail(LessonDetailRef ref, {required int id}) async {
     }
   }
 }
+
 @riverpod
 class LessonDataVideo extends _$LessonDataVideo {
   @override
@@ -48,5 +56,27 @@ class LessonDataVideo extends _$LessonDataVideo {
         initializeVideoPlayer: lessonVideo.initializeVideoPlayer,
         isPlay: lessonVideo.isPlay));
   }
-}
 
+  void playPause(bool isPlay) {
+    update((data) => data.copyWith(
+          isPlay: isPlay,
+        ));
+  }
+
+  void playNextVideo(String? url, int index) {
+    if (videoPlayerController != null) {
+      videoPlayerController!.pause();
+      videoPlayerController!.dispose();
+    }
+    String videoUrl = '${AppConstants.imageUploadsPath}$url';
+    videoPlayerController =
+        VideoPlayerController.networkUrl(Uri.parse(videoUrl));
+    Future<void>? initializeVideoPlayer = videoPlayerController?.initialize();
+    videoPlayerController?.play();
+    update((data) => data.copyWith(
+        initializeVideoPlayer: initializeVideoPlayer,
+        isPlay: true,
+        index: index));
+  }
+
+}

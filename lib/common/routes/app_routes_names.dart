@@ -7,5 +7,6 @@
   static const String home = '/home';
   static const String courseDetail = '/courseDetail';
   static const String lessonDetail = '/lessonDetail';
+  static const String paypalPayment = '/paypalPayment';
 }
 

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/models/course_entities.dart';
@@ -65,12 +66,11 @@ BoxDecoration appBoxDecorationTextField({
 class AppBoxDecorationImage extends StatelessWidget {
   final double width;
   final double height;
-  final String? imagePath;
+  final String imagePath;
   final BoxFit boxFit;
   final CourseItem? courseItem;
   final void Function()? voidFunction;
 
-  
   const AppBoxDecorationImage(
       {super.key,
       this.width = 40,
@@ -78,41 +78,49 @@ class AppBoxDecorationImage extends StatelessWidget {
       this.boxFit = BoxFit.fitHeight,
       this.courseItem,
       this.voidFunction,
-      this.imagePath});
+      required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: voidFunction,
-      child: Container(
-        height: height.h,
-        width: width.w,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20.w),
-          image: DecorationImage(
-            fit: boxFit,
-            image: imagePath != null 
-            ? NetworkImage(imagePath!)
-            : const AssetImage(ImageRes.profilePhoto) as ImageProvider<Object>,
-          ),
-        ),
-        child: courseItem == null
-            ? Container()
-            : Padding(
-                padding: EdgeInsets.only(left: 20.w, bottom: 30.h),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FadeText(text: courseItem!.name!),
-                    FadeText(
-                        text: "${courseItem!.lessonNum!} lesson",
-                        color: AppColors.primaryFourElementText,
-                        fontSize: 8.sp),
-                  ],
-                ),
-              ),
+      child: CachedNetworkImage(
+        imageUrl: imagePath,
+        imageBuilder: (context, imageProvider) {
+          return Container(
+            height: height.h,
+            width: width.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.w),
+              image: DecorationImage(fit: boxFit, image: imageProvider),
+            ),
+            child: courseItem == null
+                ? Container()
+                : Padding(
+                    padding: EdgeInsets.only(left: 20.w, bottom: 30.h),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FadeText(text: courseItem!.name!),
+                        FadeText(
+                            text: "${courseItem!.lessonNum!} lesson",
+                            color: AppColors.primaryFourElementText,
+                            fontSize: 8.sp),
+                      ],
+                    ),
+                  ),
+          );
+        },
+        placeholder: (context, url) => const CircularProgressIndicator(),
+        errorWidget: (context, url, error) => Image.asset(ImageRes.defaultImg),
       ),
     );
   }
+}
+
+BoxDecoration networkImageDecoration({required String url}) {
+  return BoxDecoration(
+    image: DecorationImage(image: NetworkImage(url)),
+  );
 }

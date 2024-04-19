@@ -123,7 +123,9 @@ class CourseDetailGoBuyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppButton(onTap: () {}, buttonName: "Go buy");
+    return AppButton(onTap: () {
+      Navigator.of(context).pushNamed(AppRoutesNames.paypalPayment);
+    }, buttonName: "Go buy");
   }
 }
 
@@ -265,7 +267,7 @@ class LessonInfo extends StatelessWidget {
                                 SizedBox(width: 10.w),
                                 const Spacer(),
                                 const AppImage(
-                                    imagePath: ImageRes.right,
+                                    imagePath: ImageRes.arrowRight,
                                     width: 24,
                                     height: 24),
                               ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/models/lesson_entities.dart';
-import 'package:ulearning_app/common/routes/app_routes_names.dart';
 import 'package:ulearning_app/common/utils/app_colors.dart';
 import 'package:ulearning_app/common/utils/constants.dart';
 import 'package:ulearning_app/common/utils/image_res.dart';
@@ -12,9 +11,9 @@ import 'package:ulearning_app/common/widgets/text_widgets.dart';
 import 'package:ulearning_app/features/lesson_detail/provider/lesson_detail_provider.dart';
 
 class LessonDetailInfo extends StatelessWidget {
-  final List<LessonItem>? lessons;
+  final List<LessonVideoItem>? lessonVideos;
   final WidgetRef ref;
-  const LessonDetailInfo({super.key, required this.lessons, required this.ref});
+  const LessonDetailInfo({super.key, required this.lessonVideos, required this.ref});
 
   @override
   Widget build(BuildContext context) {
@@ -22,22 +21,20 @@ class LessonDetailInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text14Normal(
-            text: "Lesson List",
+            text: "Another Video",
             color: AppColors.primaryText,
             fontweight: FontWeight.bold),
         SizedBox(height: 20.h),
-        lessons == null
+        lessonVideos == null
             ? Container()
             : ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: lessons!.length,
+                itemCount: lessonVideos!.length,
                 itemBuilder: (ctx, index) {
                   return InkWell(
                     onTap: () {
-                      ref.watch(lessonDetailProvider(id: lessons![index].id!));
-                      Navigator.of(context)
-                          .pushNamed(AppRoutesNames.lessonDetail);
+                      ref.read(lessonDataVideoProvider.notifier).playNextVideo(lessonVideos![index].url, index);
                     },
                     borderRadius: BorderRadius.circular(15),
                     child: Container(
@@ -47,7 +44,7 @@ class LessonDetailInfo extends StatelessWidget {
                       padding: EdgeInsets.all(10.w),
                       decoration:
                           appBoxShadow(color: AppColors.primaryBackground),
-                      child: lessons == null
+                      child: lessonVideos == null
                           ? const SizedBox(
                               child: Center(child: Text('No Values')))
                           : Row(
@@ -55,7 +52,7 @@ class LessonDetailInfo extends StatelessWidget {
                               children: [
                                 AppBoxDecorationImage(
                                   imagePath:
-                                      '${AppConstants.imageUploadsPath}${lessons![index].thumbnail}',
+                                      '${AppConstants.imageUploadsPath}${lessonVideos![index].thumbnail}',
                                   boxFit: BoxFit.fitWidth,
                                   height: 50,
                                   width: 50,
@@ -68,13 +65,13 @@ class LessonDetailInfo extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text11Normal(
-                                          text: lessons![index].name ??
-                                              "What are UI design?",
+                                          text: lessonVideos![index].name ??
+                                              "No name",
                                           maxLines: 1,
                                           color: AppColors.primaryText),
                                       Text10Normal(
-                                        text: lessons![index].name ??
-                                            "What are UI design?",
+                                        text: lessonVideos![index].name ??
+                                            "No name",
                                         maxLines: 1,
                                       ),
                                     ],
@@ -83,7 +80,7 @@ class LessonDetailInfo extends StatelessWidget {
                                 SizedBox(width: 10.w),
                                 const Spacer(),
                                 const AppImage(
-                                    imagePath: ImageRes.right,
+                                    imagePath: ImageRes.arrowRight,
                                     width: 24,
                                     height: 24),
                               ],

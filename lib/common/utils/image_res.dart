@@ -3,12 +3,12 @@ class ImageRes {
 
   ///Icon
   static const String iconBase = 'assets/icons';
-  static const String defaultImg = '$iconBase/send.png';
+  static const String defaultImg = '$iconBase/user.png';
   static const String user = '$iconBase/user.png';
   static const String lock = '$iconBase/lock.png';
   static const String home = '$iconBase/home.png';
   static const String search = '$iconBase/search2.png';
-  static const String play = '$iconBase/play-circle1.png';
+  static const String play = '$iconBase/play-circle.png';
   static const String message = '$iconBase/message-circle.png';
   static const String profilePhoto = '$iconBase/person.png';
   static const String people = '$iconBase/people.png';
@@ -21,8 +21,9 @@ class ImageRes {
   static const String videoDetail = '$iconBase/video(1).png';
   static const String fileDetail = '$iconBase/video(1).png';
   static const String dowloadDetail = '$iconBase/video(1).png';
-  static const String right = '$iconBase/arrow_right.png';
-  static const String left = '$iconBase/arrow.png';
+  static const String arrowRight = '$iconBase/arrow_right.png';
+  static const String right = '$iconBase/rewind-right.png';
+  static const String left = '$iconBase/rewind-left.png';
   static const String pause = '$iconBase/pause.png';
 
   static const String course1 = '$iconBase/Image(1).png';

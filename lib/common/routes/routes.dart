@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ulearning_app/common/models/order_model.dart';
 import 'package:ulearning_app/common/routes/app_routes_names.dart';
 import 'package:ulearning_app/features/course_detail/view/course_detail.dart';
 import 'package:ulearning_app/features/home/view/home.dart';
 import 'package:ulearning_app/features/lesson_detail/view/lesson_detail.dart';
+import 'package:ulearning_app/features/payment/view/payment.dart';
 import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/features/application/view/application.dart';
 import 'package:ulearning_app/features/sign_in/view/sign_in.dart';
@@ -36,14 +38,21 @@ class AppPages {
         path: AppRoutesNames.courseDetail,
         page: CourseDetail(),
       ),
-      const RouteEntity(path: AppRoutesNames.lessonDetail, page: LessonDetail()),
+      const RouteEntity(
+          path: AppRoutesNames.lessonDetail, page: LessonDetail()),
+      RouteEntity(path: AppRoutesNames.paypalPayment, page: PaymentScreen(
+        orderModel: OrderModel(
+          id: 2, 
+          userId: 14,
+          ),
+      )),
     ];
   }
 
   static MaterialPageRoute generateRoutSettings(RouteSettings settings) {
     //Global.storageService.removeKey(AppConstants.storageDeviceOpenFirstKey, 5);
     //Global.storageService.removeKey(AppConstants.storageUserTokenKey, 5);
-    // print('Tokkennnn-   ${Global.storageService.getUserToken()}');
+    //print('Tokkennnn-   ${Global.storageService.getUserToken()}');
     var result =
         routes().where((element) => element.path == settings.name).toList();
 

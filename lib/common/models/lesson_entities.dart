@@ -95,21 +95,25 @@ class LessonVideo {
   final List<LessonVideoItem> lessonItems;
   final Future<void>? initializeVideoPlayer;
   final bool isPlay;
+  final int index;
 
   const LessonVideo(
       {this.lessonItems = const <LessonVideoItem>[],
       this.initializeVideoPlayer,
-      this.isPlay = false});
+      this.isPlay = false,
+      this.index = 0});
 
   LessonVideo copyWith(
       {List<LessonVideoItem>? lessonItems,
       Future<void>? initializeVideoPlayer,
-      bool? isPlay}) {
+      bool? isPlay,
+      int? index}) {
     return LessonVideo(
       lessonItems: lessonItems ?? this.lessonItems,
       initializeVideoPlayer:
           initializeVideoPlayer ?? this.initializeVideoPlayer,
       isPlay: isPlay ?? this.isPlay,
+      index: index ?? this.index,
     );
   }
 }
