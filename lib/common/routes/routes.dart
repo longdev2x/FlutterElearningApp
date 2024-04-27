@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ulearning_app/common/models/order_model.dart';
 import 'package:ulearning_app/common/routes/app_routes_names.dart';
+import 'package:ulearning_app/features/buy_course/view/buy_course.dart';
 import 'package:ulearning_app/features/course_detail/view/course_detail.dart';
 import 'package:ulearning_app/features/home/view/home.dart';
 import 'package:ulearning_app/features/lesson_detail/view/lesson_detail.dart';
-import 'package:ulearning_app/features/payment/view/payment.dart';
+import 'package:ulearning_app/features/profile/courses_bought/view/courses_bought.dart';
+import 'package:ulearning_app/features/profile/settings/view/settings.dart';
 import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/features/application/view/application.dart';
 import 'package:ulearning_app/features/sign_in/view/sign_in.dart';
@@ -40,18 +41,16 @@ class AppPages {
       ),
       const RouteEntity(
           path: AppRoutesNames.lessonDetail, page: LessonDetail()),
-      RouteEntity(path: AppRoutesNames.paypalPayment, page: PaymentScreen(
-        orderModel: OrderModel(
-          id: 2, 
-          userId: 14,
-          ),
-      )),
+      const RouteEntity(path: AppRoutesNames.buyCourse, page: BuyCourseScreen()),
+      const RouteEntity(path: AppRoutesNames.settings, page: SettingsScreen()),
+      const RouteEntity(path: AppRoutesNames.coursesBought, page: CoursesBought())
     ];
   }
 
   static MaterialPageRoute generateRoutSettings(RouteSettings settings) {
-    //Global.storageService.removeKey(AppConstants.storageDeviceOpenFirstKey, 5);
-    //Global.storageService.removeKey(AppConstants.storageUserTokenKey, 5);
+    // Global.storageService.removeKey(AppConstants.storageDeviceOpenFirstKey, 5);
+    // Global.storageService.removeKey(AppConstants.storageUserTokenKey, 5);
+    // Global.storageService.removeKey(AppConstants.storageUserProfileKey, 5);
     //print('Tokkennnn-   ${Global.storageService.getUserToken()}');
     var result =
         routes().where((element) => element.path == settings.name).toList();

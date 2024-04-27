@@ -1,8 +1,8 @@
 class CourseRequestEntity{
-  final int? id;
-  const CourseRequestEntity({this.id});
+  final int? courseId;
+  const CourseRequestEntity({this.courseId});
   Map<String, dynamic>? toJson() => {
-    'id' : id,
+    'course_id' : courseId,
   };
 }
 

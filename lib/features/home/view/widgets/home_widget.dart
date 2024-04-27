@@ -14,7 +14,7 @@ import 'package:ulearning_app/features/home/provider/course_list_provider.dart';
 import 'package:ulearning_app/features/home/provider/user_profile_provider.dart';
 import 'package:ulearning_app/global.dart';
 
-AppBar homeAppBar(WidgetRef ref) {
+AppBar homeAppBar(WidgetRef ref, BuildContext context) {
   final fetchUserProfile = ref.watch(fetchUserProfileProvider);
   return AppBar(
     leading: IconButton(
@@ -26,9 +26,15 @@ AppBar homeAppBar(WidgetRef ref) {
       fetchUserProfile.when(
           data: (data) {
             return GestureDetector(
-              onTap: () {},
-              child: AppBoxDecorationImage(
-                  imagePath: "${AppConstants.serverApiUrl}${data.avatar}"),
+              onTap: () {
+              },
+              child: Row(
+                children: [
+                  AppBoxDecorationImage(
+                    imagePath: "${AppConstants.serverApiUrl}${data.avatar}"),
+                  SizedBox(width: 20.w),
+                ],
+              ),
             );
           },
           error: (error, stackTrace) => AppImage(
@@ -218,7 +224,7 @@ class CourseItemGrid extends ConsumerWidget {
             itemBuilder: (ctx, index) {
               return AppBoxDecorationImage(
                   voidFunction: () async {
-                    Navigator.of(context).pushNamed(AppRoutesNames.courseDetail, arguments: data[index].id);
+                    Navigator.of(context).pushNamed(AppRoutesNames.courseDetail, arguments: {'id' : data[index].id});
                   },
                   courseItem: data[index],
                   imagePath:
@@ -241,7 +247,10 @@ class CourseItemGrid extends ConsumerWidget {
               style: const TextStyle(color: Colors.black, fontSize: 30)),
         ));
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
+      loading: () => Center(child: SizedBox(
+        height: 20.h,
+        width: 20.h,
+        child: const CircularProgressIndicator())),
     );
   }
 }

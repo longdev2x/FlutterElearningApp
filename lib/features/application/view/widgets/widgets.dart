@@ -3,6 +3,7 @@ import 'package:ulearning_app/common/utils/app_colors.dart';
 import 'package:ulearning_app/common/utils/image_res.dart';
 import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/features/home/view/home.dart';
+import 'package:ulearning_app/features/profile/view/profile_screen.dart';
 
 var bottomTabs = <BottomNavigationBarItem>[
   BottomNavigationBarItem(
@@ -54,7 +55,7 @@ Widget appScreens({int index = 0}){
     const Center(child: AppImage(imagePath: ImageRes.search, width: 250)),
     const Center(child: AppImage(imagePath: ImageRes.play, width: 250)),
     const Center(child: AppImage(imagePath: ImageRes.message, width: 250)),
-    const Center(child: AppImage(imagePath: ImageRes.profilePhoto, width: 250)),
+    const ProfileScreen(),
   ];
   return screens[index];
 }

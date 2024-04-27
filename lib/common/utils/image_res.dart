@@ -18,14 +18,15 @@ class ImageRes {
   static const String banner2 = '$iconBase/Image(1).png';
   static const String banner3 = '$iconBase/Image(2).png';
   static const String menu = '$iconBase/menu.png';
-  static const String videoDetail = '$iconBase/video(1).png';
-  static const String fileDetail = '$iconBase/video(1).png';
+  static const String videoDetail = '$iconBase/video_detail.png';
+  static const String fileDetail = '$iconBase/file_detail.png';
   static const String dowloadDetail = '$iconBase/video(1).png';
   static const String arrowRight = '$iconBase/arrow_right.png';
   static const String right = '$iconBase/rewind-right.png';
   static const String left = '$iconBase/rewind-left.png';
   static const String pause = '$iconBase/pause.png';
-
+  static const String headpic = '$iconBase/headpic.png';
+  static const String editImage = '$iconBase/edit_3.png';
   static const String course1 = '$iconBase/Image(1).png';
   static const String course2 = '$iconBase/Image(2).png';
   static const String course3 = '$iconBase/image(3).png';
@@ -33,6 +34,16 @@ class ImageRes {
   static const String course5 = '$iconBase/image(5).png';
   static const String course6 = '$iconBase/image(6).png';
   static const String course7 = '$iconBase/image(7).png';
+  static const String profileVideo = '$iconBase/profile_video.png';
+  static const String profileBook = '$iconBase/profile_book.png';
+  static const String profileStar = '$iconBase/profile_star.png';
+  static const String bell = '$iconBase/bell.png';
+  static const String settings = '$iconBase/settings.png';
+  static const String creditCard = '$iconBase/credit-card.png';
+  static const String award = '$iconBase/award.png';
+  static const String love = '$iconBase/heart(1).png';
+  static const String reminder = '$iconBase/cube.png';
+  static const String logOut = '$iconBase/Logout.png';
 
   ///Images
   ///

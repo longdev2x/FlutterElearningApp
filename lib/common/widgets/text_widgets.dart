@@ -48,7 +48,35 @@ class Text11Normal extends StatelessWidget {
       maxLines: maxLines,
       style: TextStyle(
         color: color,
-        fontSize: 10.sp,
+        fontSize: 11.sp,
+        fontWeight: fontweight,
+        overflow: TextOverflow.ellipsis,
+      ),
+    );
+  }
+}
+
+class Text13Normal extends StatelessWidget {
+  final String text;
+  final Color color;
+  final FontWeight fontweight;
+  final int? maxLines;
+  const Text13Normal(
+      {super.key,
+      required this.text,
+      this.fontweight = FontWeight.normal,
+      this.maxLines,
+      this.color = AppColors.primaryElementText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: TextAlign.start,
+      maxLines: maxLines,
+      style: TextStyle(
+        color: color,
+        fontSize: 13.sp,
         fontWeight: fontweight,
         overflow: TextOverflow.ellipsis,
       ),
@@ -143,7 +171,7 @@ class TextUnderline extends StatelessWidget {
         text,
         style: TextStyle(
           fontWeight: FontWeight.normal,
-          fontSize: 12.sp,
+          fontSize: 24.sp,
           color: AppColors.primaryText,
           decoration: TextDecoration.underline,
           decorationColor: AppColors.primaryText,

@@ -45,16 +45,19 @@ class UserLoginResponseEntity {
     this.data,
   });
 
-  factory UserLoginResponseEntity.fromJson(Map<String, dynamic> json) =>
-      UserLoginResponseEntity(
+  factory UserLoginResponseEntity.fromJson(Map<String, dynamic> json) {
+    return UserLoginResponseEntity(
         code: json["code"],
         msg: json["msg"],
         data: UserProfile.fromJson(json["data"]),
       );
+  }
+      
 }
 
 // login result
 class UserProfile {
+  final int? id;
   final String? accessToken;
   final String? token;
   final String? name;
@@ -64,6 +67,7 @@ class UserProfile {
   final int? type;
 // Generic Constructor
   const UserProfile({
+    this.id,
     this.accessToken,
     this.token,
     this.name,
@@ -79,6 +83,7 @@ class UserProfile {
     //   return UserProfile();
     // }
     return UserProfile(
+      id: json['id'],
       accessToken: json["access_token"],
       token: json["token"],
       name: json["name"],
@@ -90,6 +95,7 @@ class UserProfile {
   }
 
   Map<String, dynamic> toJson() => {
+        'id' : id,
         "access_token": accessToken,
         "token": token,
         "name": name,

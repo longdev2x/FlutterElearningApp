@@ -75,7 +75,7 @@ class AppBoxDecorationImage extends StatelessWidget {
       {super.key,
       this.width = 40,
       this.height = 40,
-      this.boxFit = BoxFit.fitHeight,
+      this.boxFit = BoxFit.fitWidth,
       this.courseItem,
       this.voidFunction,
       required this.imagePath});
@@ -112,7 +112,10 @@ class AppBoxDecorationImage extends StatelessWidget {
                   ),
           );
         },
-        placeholder: (context, url) => const CircularProgressIndicator(),
+        placeholder: (context, url) => SizedBox(
+        height: 20.h,
+        width: 20.h,
+        child: const CircularProgressIndicator()),
         errorWidget: (context, url, error) => Image.asset(ImageRes.defaultImg),
       ),
     );

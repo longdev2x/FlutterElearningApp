@@ -10,12 +10,12 @@ class CourseDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final arguments = ModalRoute.of(context)!.settings.arguments as int;
+    final arguments = ModalRoute.of(context)!.settings.arguments as Map;
 
     final courseDetailState =
-        ref.watch(courseDetailFutureProviderFamily(arguments));
+        ref.watch(courseDetailFutureProviderFamily(arguments['id']));
     final fetchListLesson =
-        ref.watch(lessonFutureProviderFamily(arguments));
+        ref.watch(lessonFutureProviderFamily(arguments['id']));
     return courseDetailState.when(
         data: (courseItem) => courseItem == null
             ? const SizedBox(child: Center(child: Text('No course here !!!!')))
@@ -36,7 +36,7 @@ class CourseDetail extends ConsumerWidget {
                         SizedBox(height: 15.h),
                         CourseDetailDescription(courseItem: courseItem),
                         SizedBox(height: 15.h),
-                        const CourseDetailGoBuyButton(),
+                        CourseDetailGoBuyButton(courseItem : courseItem),
                         SizedBox(height: 15.h),
                         CourseDetailIncludes(courseItem: courseItem),
                         SizedBox(height: 15.h),

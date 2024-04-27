@@ -119,13 +119,17 @@ class CourseDetailDescription extends StatelessWidget {
 }
 
 class CourseDetailGoBuyButton extends StatelessWidget {
-  const CourseDetailGoBuyButton({super.key});
-
+  final CourseItem courseItem;
+  const CourseDetailGoBuyButton({super.key, required this.courseItem});
   @override
   Widget build(BuildContext context) {
-    return AppButton(onTap: () {
-      Navigator.of(context).pushNamed(AppRoutesNames.paypalPayment);
-    }, buttonName: "Go buy");
+    return AppButton(
+      onTap: () {
+        Navigator.of(context).pushNamed(AppRoutesNames.buyCourse, arguments: {
+          'id' : courseItem.id
+        });
+      }, 
+      buttonName: "Go buy");
   }
 }
 

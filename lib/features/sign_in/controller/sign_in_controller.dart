@@ -66,7 +66,6 @@ class SignInController {
       if (exception.code == 'wrong-password') {
         toastInfo('Sai mật khẩu');
       } else {
-
         toastInfo(exception.stackTrace.toString());
       } 
       ref.read(appLoaderNotifierProvider.notifier).updateLoader(false);

@@ -15,8 +15,8 @@ AppBar buildAppBar({required String title}) {
   );
 }
 
-AppBar buildGlobalAppBar({required String title}) {
+AppBar buildGlobalAppBar({String? title}) {
   return AppBar(
-    title: Text16Normal(text: title, color: AppColors.primaryText),
+    title: title == null ? const Text('') : Text16Normal(text: title, color: AppColors.primaryText),
   );
 }
