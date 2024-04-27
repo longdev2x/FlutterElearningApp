@@ -4,7 +4,6 @@ import 'package:ulearning_app/features/profile/courses_bought/repo/courses_bough
 
 final coursesBoughtProvider = FutureProvider<List<CourseItem>?>((ref) async {
   final CourseListResponseEntity response = await CoursesBoughtRepo.coursesBought();
-      print('code---${response.code}, data --- ${response.data}');
   if(response.code == 200) {
     return response.data;
   } else {

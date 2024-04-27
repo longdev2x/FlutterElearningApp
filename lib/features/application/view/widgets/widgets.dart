@@ -4,6 +4,7 @@ import 'package:ulearning_app/common/utils/image_res.dart';
 import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/features/home/view/home.dart';
 import 'package:ulearning_app/features/profile/view/profile_screen.dart';
+import 'package:ulearning_app/features/search/view/search.dart';
 
 var bottomTabs = <BottomNavigationBarItem>[
   BottomNavigationBarItem(
@@ -38,8 +39,8 @@ var bottomTabs = <BottomNavigationBarItem>[
 ];
 
 Widget _botttomIcon(
-    {double height = 15,
-    double width = 15,
+    {double height = 18,
+    double width = 18,
     required String imagepath,
     Color color = AppColors.primaryFourElementText}) {
   return SizedBox(
@@ -52,7 +53,7 @@ Widget _botttomIcon(
 Widget appScreens({int index = 0}){
   List<Widget> screens = [
     const HomeScreen(),
-    const Center(child: AppImage(imagePath: ImageRes.search, width: 250)),
+    const SearchScreen(),
     const Center(child: AppImage(imagePath: ImageRes.play, width: 250)),
     const Center(child: AppImage(imagePath: ImageRes.message, width: 250)),
     const ProfileScreen(),

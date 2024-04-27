@@ -18,7 +18,7 @@ class ProfileScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Image.asset(ImageRes.arrowRight),
-        title: const Text14Normal(text: 'Profile', fontweight: FontWeight.bold, color: AppColors.primaryText),
+        title: const Text14Normal(text: 'Profile', fontweight: FontWeight.normal, color: AppColors.primaryText),
         actions: [
           GestureDetector(
             onTap: () {toastInfo('Test');},

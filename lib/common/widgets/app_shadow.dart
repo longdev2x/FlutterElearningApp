@@ -42,10 +42,10 @@ BoxDecoration appBoxShadowWithRadius(
     border: border,
     boxShadow: [
       BoxShadow(
-        color: Colors.red.withOpacity(0.1),
+        color: Colors.grey.withOpacity(0.1),
         blurRadius: bR,
         spreadRadius: sR,
-        offset: const Offset(0, 5),
+        offset: const Offset(0, 2),
       ),
     ],
   );

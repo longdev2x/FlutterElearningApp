@@ -7,7 +7,6 @@ class CoursesBoughtRepo {
     var response = await HttpUtil().post(
       '/api/coursesBought'
     );
-    print('responseRepo ----- $response');
     return CourseListResponseEntity.fromJson(response);
   }
 }

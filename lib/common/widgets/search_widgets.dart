@@ -7,7 +7,8 @@ import 'package:ulearning_app/common/widgets/app_text_fields.dart';
 import 'package:ulearning_app/common/widgets/image_widgets.dart';
 
 class AppSearchBar extends StatelessWidget {
-  const AppSearchBar({super.key});
+  final Function()? onTap;
+  const AppSearchBar({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class AppSearchBar extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: onTap,
           child: Container(
             padding: EdgeInsets.all(5.w),
             width: 40.w,
