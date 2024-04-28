@@ -87,3 +87,15 @@ class CourseItem {
     );
   }
 }
+
+
+class CourseSearchRequest {
+  final String? search;
+  const CourseSearchRequest({this.search});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'search' : search
+    };
+  }
+}

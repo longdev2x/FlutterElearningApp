@@ -4,16 +4,16 @@ import 'package:ulearning_app/common/services/http_util.dart';
 class SearchRepo {
   static Future<CourseListResponseEntity> courseDefaultSearch() async {
     var response = await HttpUtil().post(
-      'api/courseList',
+      'api/courseDefaultSearch',
       queryParameters: {'keyword' : 'ok'} 
     );
     return CourseListResponseEntity.fromJson(response);
   }
 
-  static Future<CourseListResponseEntity> courseSearch() async {
+  static Future<CourseListResponseEntity> courseSearch({CourseSearchRequest? params}) async {
     var response = await HttpUtil().post(
       'api/courseSearch',
-      queryParameters: {'keyword' : 'ok'} 
+      queryParameters: params?.toJson(), 
     );
     return CourseListResponseEntity.fromJson(response);
   }

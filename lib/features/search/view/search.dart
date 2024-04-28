@@ -20,7 +20,9 @@ class SearchScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20.h),
-              const AppSearchBar(),
+              AppSearchBar(onChanged: (value) {
+               ref.read(searchAsyncNotifierProvider.notifier).searchCourse(search: value); 
+              },),
               SizedBox(height: 10.h),
               fetchCourse.when(
               data: (data) {

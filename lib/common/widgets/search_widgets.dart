@@ -8,7 +8,8 @@ import 'package:ulearning_app/common/widgets/image_widgets.dart';
 
 class AppSearchBar extends StatelessWidget {
   final Function()? onTap;
-  const AppSearchBar({super.key, this.onTap});
+  final Function(String value)? onChanged;
+  const AppSearchBar({super.key, this.onTap, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,11 @@ class AppSearchBar extends StatelessWidget {
               SizedBox(
                 width: 240.w,
                 height: 40.h,
-                child: const AppTextFieldOnly(
-                    width: 240, height: 40, hintText: 'Search your course...'),
+                child: AppTextFieldOnly(
+                    onChanged: onChanged,
+                    width: 240, 
+                    height: 40, 
+                    hintText: 'Search your course...'),
               ),
             ],
           ),
